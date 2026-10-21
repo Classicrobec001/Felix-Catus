@@ -108,6 +108,9 @@ a:hover .fx>span:nth-child(2),button:hover .fx>span:nth-child(2){transform:trans
 @keyframes rise{to{transform:none}}
 .hero h1 .w:nth-child(1)>span{animation-delay:.05s}.hero h1 .w:nth-child(2)>span{animation-delay:.15s}.hero h1 .w:nth-child(3)>span{animation-delay:.25s}.hero h1 .w:nth-child(4)>span{animation-delay:.35s}.hero h1 .w:nth-child(5)>span{animation-delay:.45s}.hero h1 .w:nth-child(6)>span{animation-delay:.55s}
 .hero h1 em{font-style:normal;color:var(--ox)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hero .sr+div>.hero-sub{margin-top:0}
+.lead.intro{font-size:clamp(1.6rem,3.2vw,2.6rem);line-height:1.2;letter-spacing:-.025em;max-width:28ch}
 .hero-sub{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;margin-top:2.5rem}
 .hero-img{margin-top:3.5rem}
 .hero-img .photo{aspect-ratio:21/9;border-radius:6px}
@@ -226,10 +229,6 @@ blockquote cite{font-style:normal;color:var(--mute);font-size:.95rem}
 .contact a small{font-weight:500;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
 .contact a:hover{color:var(--ox)}
 
-/* big cta */
-.bigcta h2{font-size:clamp(2.6rem,8vw,7rem)}
-.bigcta .wrap{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end}
-@media (max-width:860px){.bigcta .wrap{grid-template-columns:1fr}}
 
 footer{position:relative;z-index:2;background:var(--ink);color:var(--on-ink-mute);padding-block:3rem 2.5rem;border-top:1px solid rgba(242,235,221,.15);font-size:.95rem}
 footer .cols{display:flex;flex-wrap:wrap;gap:2rem 4rem;justify-content:space-between;align-items:flex-start}
@@ -256,9 +255,9 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
       <a href="#books"><span class="fx"><span>Books</span><span>Books</span></span></a>
       <a href="#authors"><span class="fx"><span>Authors</span><span>Authors</span></span></a>
       <a href="#contact"><span class="fx"><span>Contact</span><span>Contact</span></span></a>
-      <a class="m-only" href="#submit">Submit a manuscript</a>
+      <a class="m-only" href="#submit">Chapbook Submission</a>
     </nav>
-    <a class="btn" href="#submit"><span class="fx"><span>Submit a manuscript</span><span>Submit a manuscript</span></span></a>
+    <a class="btn" href="#submit"><span class="fx"><span>Chapbook Submission</span><span>Chapbook Submission</span></span></a>
     <button class="menu" id="menu" aria-expanded="false" aria-controls="links">Menu</button>
   </div>
 </header>
@@ -269,14 +268,15 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
 <article class="page" id="home">
   <section class="hero band">
     <div class="wrap">
-      <h1><span class="w"><span>Poems</span></span> <span class="w"><span>we</span></span> <span class="w"><span><em>love,</em></span></span><br><span class="w"><span>printed</span></span> <span class="w"><span>with</span></span> <span class="w"><span>claws.</span></span></h1>
+      <h1 class="sr">Felis Catus Press</h1>
       <div>
         <div class="hero-sub">
           <div>
-            <p class="lead">Felis Catus Press publishes the finest poetry from Nigeria. No submission fee, no publishing cost, one window every March.</p>
+            <p class="lead intro">Felis Catus Press publishes the finest poetry from Nigeria. No submission fee, no publishing cost, one window every March.</p>
             <div class="actions">
               <a class="btn" href="#books"><span class="fx"><span>Browse the books</span><span>Browse the books</span></span></a>
-              <a class="btn ghost" href="#submit"><span class="fx"><span>How to submit</span><span>How to submit</span></span></a>
+              <a class="btn ghost" href="#submit"><span class="fx"><span>Submit to Chapbooks</span><span>Submit to Chapbooks</span></span></a>
+              <a class="btn ghost" href="#prize"><span class="fx"><span>Submit to the Prize</span><span>Submit to the Prize</span></span></a>
             </div>
           </div>
           </div>
@@ -295,7 +295,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
     <div class="wrap">
       <div class="g2 rv" style="margin-bottom:3rem">
         <div><h2>Five collections, out now.</h2></div>
-        <p class="lead mute" style="align-self:end">₦3,500 each. Orders are completed on WhatsApp. We will endeavour to make our books available at Rovingheights, Ouida Books and Book O' Clock.</p>
+        <p class="lead mute" style="align-self:end">Orders are completed on WhatsApp. We will endeavour to make our books available at Rovingheights, Ouida Books and Book O' Clock.</p>
       </div>
       <div class="books rv">
         <a class="book" href="#book-rainbow">
@@ -308,15 +308,15 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
         </a>
         <a class="book" href="#book-holocaust">
           <div class="cover"><div class="fb"><small>Felis Catus Press</small>Holocaust</div><img src="covers/holocaust.jpg" alt="" onerror="this.remove()"></div>
-          <div class="meta"><h3>Holocaust</h3><p class="by">Henry Opeyemi</p><span class="price">₦3,500</span></div>
+          <div class="meta"><h3>Holocaust</h3><p class="by">Henry Opeyemi</p><span class="price">₦4,500</span></div>
         </a>
         <a class="book" href="#book-psalmic">
           <div class="cover"><div class="fb ox"><small>Felis Catus Press</small>The Psalmic Field</div><img src="covers/the-psalmic-field.jpg" alt="" onerror="this.remove()"></div>
-          <div class="meta"><h3>The Psalmic Field</h3><p class="by">Ridwan Àdìsá Fasasi</p><span class="price">₦3,500</span></div>
+          <div class="meta"><h3>The Psalmic Field</h3><p class="by">Ridwan Àdìsá Fasasi</p><span class="price">₦4,500</span></div>
         </a>
         <a class="book" href="#book-road">
           <div class="cover"><div class="fb"><small>Felis Catus Press</small>The Road Is a Body</div><img src="covers/the-road-is-a-body.jpg" alt="" onerror="this.remove()"></div>
-          <div class="meta"><h3>The Road Is a Body</h3><p class="by">Okoli Stephen Nonso</p><span class="price">₦3,500</span></div>
+          <div class="meta"><h3>The Road Is a Body</h3><p class="by">Okoli Stephen Nonso</p><span class="price">₦4,500</span></div>
         </a>
       </div>
     </div>
@@ -634,7 +634,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
   <section class="hero band">
     <div class="wrap">
       <h1><span class="w"><span>Our</span></span> <span class="w"><span><em>books.</em></span></span></h1>
-      <p class="lead mute" style="margin-top:2rem">Books published by Felis Catus Press. Each is ₦3,500; orders are completed on WhatsApp.</p>
+      <p class="lead mute" style="margin-top:2rem">Books published by Felis Catus Press. Orders are completed on WhatsApp.</p>
     </div>
   </section>
   <section class="band" style="padding-top:0">
@@ -649,15 +649,15 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
       </a>
       <a class="book" href="#book-holocaust">
         <div class="cover"><div class="fb"><small>Felis Catus Press</small>Holocaust</div><img src="covers/holocaust.jpg" alt="" onerror="this.remove()"></div>
-        <div class="meta"><h3>Holocaust</h3><p class="by">Henry Opeyemi</p><span class="price">₦3,500</span></div>
+        <div class="meta"><h3>Holocaust</h3><p class="by">Henry Opeyemi</p><span class="price">₦4,500</span></div>
       </a>
       <a class="book" href="#book-psalmic">
         <div class="cover"><div class="fb ox"><small>Felis Catus Press</small>The Psalmic Field</div><img src="covers/the-psalmic-field.jpg" alt="" onerror="this.remove()"></div>
-        <div class="meta"><h3>The Psalmic Field</h3><p class="by">Ridwan Àdìsá Fasasi</p><span class="price">₦3,500</span></div>
+        <div class="meta"><h3>The Psalmic Field</h3><p class="by">Ridwan Àdìsá Fasasi</p><span class="price">₦4,500</span></div>
       </a>
       <a class="book" href="#book-road">
         <div class="cover"><div class="fb"><small>Felis Catus Press</small>The Road Is a Body</div><img src="covers/the-road-is-a-body.jpg" alt="" onerror="this.remove()"></div>
-        <div class="meta"><h3>The Road Is a Body</h3><p class="by">Okoli Stephen Nonso</p><span class="price">₦3,500</span></div>
+        <div class="meta"><h3>The Road Is a Body</h3><p class="by">Okoli Stephen Nonso</p><span class="price">₦4,500</span></div>
       </a>
     </div>
   </section>
@@ -733,8 +733,8 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
       <div class="info">
         <h1 style="font-size:clamp(2.2rem,5vw,4.4rem)">Holocaust</h1>
         <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Henry Opeyemi</a></p>
-        <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
-        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20Holocaust%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
+        <p style="font-weight:700;font-size:1.4rem">₦4,500</p>
+        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20Holocaust%20%28%E2%82%A64%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
       </div>
     </div>
   </section>
@@ -755,8 +755,8 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
       <div class="info">
         <h1 style="font-size:clamp(2.2rem,5vw,4.4rem)">The Psalmic Field</h1>
         <p class="lead mute" style="margin-top:1rem">Poems by <a href="#authors">Ridwan Àdìsá Fasasi</a></p>
-        <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
-        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Psalmic%20Field%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
+        <p style="font-weight:700;font-size:1.4rem">₦4,500</p>
+        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Psalmic%20Field%20%28%E2%82%A64%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
       </div>
     </div>
   </section>
@@ -777,8 +777,8 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
       <div class="info">
         <h1 style="font-size:clamp(2.2rem,5vw,4.4rem)">The Road Is a Body</h1>
         <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Okoli Stephen Nonso</a></p>
-        <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
-        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Road%20Is%20a%20Body%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
+        <p style="font-weight:700;font-size:1.4rem">₦4,500</p>
+        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Road%20Is%20a%20Body%20%28%E2%82%A64%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
       </div>
     </div>
   </section>
@@ -864,13 +864,6 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
 
 </main>
 
-<section class="band ox bigcta">
-  <div class="wrap">
-    <div class="rv"><h2>Have a collection ready?</h2></div>
-    <div class="actions" style="margin:0"><a class="btn" href="#submit"><span class="fx"><span>Read the guidelines</span><span>Read the guidelines</span></span></a></div>
-  </div>
-</section>
-
 <footer>
   <div class="wrap cols">
     <div>
@@ -954,8 +947,6 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
     ? '<span class="dot open"></span><div class="t"><strong>Entries are open</strong><p>Until 15 March 2027. Winner announced 15 June 2027.</p></div>' + mail
     : '<span class="dot"></span><div class="t"><strong>Entries are closed</strong><p>' + (now < pWin ? 'The winner will be announced on 15 June 2027.' : 'Details of the next edition will be announced here.') + '</p></div>';
 
-  // shared CTA + footer reveal
-  watch(document.querySelector('.bigcta'));
   go((location.hash||'#home').slice(1));
 })();
 </script>
