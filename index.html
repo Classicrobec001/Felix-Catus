@@ -22,7 +22,8 @@
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+main{flex:1 0 auto}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--paper)}
 a{color:inherit}
 img{max-width:100%;display:block}
@@ -82,6 +83,7 @@ a:hover .fx>span:nth-child(2),button:hover .fx>span:nth-child(2){transform:trans
 .band.ox .btn{background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
 .band.ox .btn:hover{background:var(--on-ink);color:var(--ink);border-color:var(--on-ink)}
 .actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+@media (max-width:560px){.cta3{display:grid;grid-template-columns:1fr;gap:.6rem}.cta3 .btn{justify-content:center;padding-block:.95rem}}
 
 /* marquee */
 .ticker{overflow:hidden;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);padding-block:.7rem;white-space:nowrap;background:var(--paper-2);position:relative;z-index:2}
@@ -252,7 +254,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
     <nav class="links" id="links">
       <a href="#home"><span class="fx"><span>Home</span><span>Home</span></span></a>
       <a href="#about"><span class="fx"><span>About</span><span>About</span></span></a>
-      <a href="#submit"><span class="fx"><span>Chapbook Submission</span><span>Chapbook Submission</span></span></a>
+      <a href="#submit"><span class="fx"><span>Submit Chapbook</span><span>Submit Chapbook</span></span></a>
       <a href="#prize"><span class="fx"><span>The Prize</span><span>The Prize</span></span></a>
       <a href="#books"><span class="fx"><span>Books</span><span>Books</span></span></a>
       <a href="#authors"><span class="fx"><span>Authors</span><span>Authors</span></span></a>
@@ -274,7 +276,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
         <div class="hero-sub">
           <div>
             <p class="lead intro">Felis Catus Press publishes the finest poetry from Nigeria. No submission fee, no publishing cost, one window every March.</p>
-            <div class="actions">
+            <div class="actions cta3">
               <a class="btn" href="#books"><span class="fx"><span>Browse the books</span><span>Browse the books</span></span></a>
               <a class="btn ghost" href="#submit"><span class="fx"><span>Submit to Chapbooks</span><span>Submit to Chapbooks</span></span></a>
               <a class="btn ghost" href="#prize"><span class="fx"><span>Submit to the Prize</span><span>Submit to the Prize</span></span></a>
@@ -882,7 +884,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
       <p style="max-width:32ch;margin:.75rem 0 0">Publishing the finest poetry from Nigeria. An imprint of Nimble House, Lagos.</p>
     </div>
     <nav>
-      <a href="#about">About</a><a href="#submit">Submit</a><a href="#prize">The Prize</a><a href="#books">Books</a><a href="#authors">Authors</a><a href="#contact">Contact</a>
+      <a href="#about">About</a><a href="#submit">Submit Chapbook</a><a href="#prize">The Prize</a><a href="#books">Books</a><a href="#authors">Authors</a><a href="#contact">Contact</a>
     </nav>
     <p style="margin:0">© <span id="year"></span> Felis Catus Press</p>
   </div>
