@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Felis Catus Press</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: paper-and-ink poster. Oversized display type, a cream paper ground with grain,
+   ink-black bands, one oxblood accent used only for action and emphasis. */
+:root{
+  --paper:#FFFFFF; --paper-2:#F3F3F0; --ink:#15130F; --ink-2:#2A2620; --mute:#6B6B66;
+  --line:rgba(21,19,15,.14); --ox:#B8321E; --ox-deep:#8E2415; --on-ink:#FFFFFF; --on-ink-mute:#A8A8A2;
+  --font:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gx:max(20px,env(safe-area-inset-left,0px)); --gxr:max(20px,env(safe-area-inset-right,0px));
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:1.0625rem;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--paper)}
+a{color:inherit}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.035em;line-height:.95;text-wrap:balance}
+h1{font-size:clamp(3rem,10.5vw,9.5rem)}
+h2{font-size:clamp(2.2rem,5.5vw,4.6rem)}
+h3{font-size:clamp(1.35rem,2.2vw,1.8rem);letter-spacing:-.02em;line-height:1.1}
+p{margin:0 0 1em;max-width:60ch}
+.wrap{width:100%;max-width:1320px;margin-inline:auto;padding-left:var(--gx);padding-right:var(--gxr)}
+.band{position:relative;z-index:2}
+.band.ink{background:var(--ink);color:var(--on-ink)}
+.band.ink .mute{color:var(--on-ink-mute)}
+.band.ox{background:var(--ox);color:var(--on-ink)}
+.mute{color:var(--mute)}
+.lead{font-size:clamp(1.15rem,1.6vw,1.45rem);line-height:1.4;letter-spacing:-.01em}
+section{padding-block:clamp(4rem,9vw,8rem)}
+:focus-visible{outline:3px solid var(--ox);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--paper);border-bottom:1.5px solid var(--ink)}
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1.5rem;min-height:4.5rem}
+.nav>.btn{justify-self:end}
+.links .m-only{display:none}
+.brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-weight:700;letter-spacing:-.02em;font-size:1.05rem;justify-self:start}
+.brand .cat{width:30px;height:30px;flex:none}
+.links{display:flex;gap:1.5rem}
+.links a{text-decoration:none;font-weight:500;font-size:.95rem}
+.links a.active{text-decoration:underline;text-underline-offset:.35em;text-decoration-color:var(--ox);text-decoration-thickness:2px}
+.menu{display:none;background:none;border:1.5px solid var(--ink);border-radius:999px;padding:.45rem .95rem;font:inherit;font-weight:600;color:inherit;cursor:pointer}
+@media (max-width:860px){
+  .links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--paper);border-bottom:1.5px solid var(--ink);padding:.5rem var(--gx) 1rem}
+  .links.open{display:flex}
+  .links a{padding:.85rem 0;font-size:1.4rem;font-weight:700;letter-spacing:-.02em;border-bottom:1px solid var(--line)}
+  .menu{display:inline-flex}
+  .nav>.btn{display:none}
+  .nav{display:flex;justify-content:space-between}
+  .links .m-only{display:block}
+}
+
+/* split-letter hover (text slides up, duplicate slides in) */
+.fx{position:relative;display:inline-block;overflow:hidden;line-height:1.2}
+.fx>span{display:block;transition:transform .45s var(--ease)}
+.fx>span:nth-child(2){position:absolute;inset:0;transform:translateY(110%)}
+a:hover .fx>span:first-child,button:hover .fx>span:first-child{transform:translateY(-110%)}
+a:hover .fx>span:nth-child(2),button:hover .fx>span:nth-child(2){transform:translateY(0)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;font:inherit;font-weight:600;font-size:.98rem;padding:.8rem 1.35rem;border-radius:999px;border:1.5px solid var(--ink);background:var(--ink);color:var(--on-ink);cursor:pointer;transition:background .25s,color .25s,transform .25s var(--ease)}
+.btn:hover{background:var(--ox);border-color:var(--ox);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.band.ink .btn{background:var(--on-ink);color:var(--ink);border-color:var(--on-ink)}
+.band.ink .btn:hover{background:var(--ox);color:var(--on-ink);border-color:var(--ox)}
+.band.ink .btn.ghost{background:transparent;color:var(--on-ink)}
+.band.ink .btn.ghost:hover{background:var(--on-ink);color:var(--ink)}
+.band.ox .btn{background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
+.band.ox .btn:hover{background:var(--on-ink);color:var(--ink);border-color:var(--on-ink)}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+
+/* marquee */
+.ticker{overflow:hidden;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);padding-block:.7rem;white-space:nowrap;background:var(--paper-2);position:relative;z-index:2}
+.ticker .track{display:inline-flex;gap:3rem;animation:slide 32s linear infinite;will-change:transform}
+.ticker span{font-weight:600;letter-spacing:.02em;font-size:.95rem;text-transform:uppercase}
+.ticker span::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ox);margin-left:3rem;vertical-align:middle}
+@keyframes slide{to{transform:translateX(-50%)}}
+.ticker:hover .track{animation-play-state:paused}
+
+/* photo frames */
+.photo{position:relative;overflow:hidden;background:var(--ink-2);border-radius:6px;isolation:isolate}
+.photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05);transition:transform 1.2s var(--ease)}
+.photo:hover img{transform:scale(1.04)}
+.photo .cap{position:absolute;left:0;right:0;bottom:0;padding:.75rem 1rem;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--on-ink);background:linear-gradient(transparent,rgba(21,19,15,.75));z-index:2}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+
+/* hero */
+.hero{padding-block:clamp(3rem,7vw,6rem) clamp(3rem,6vw,5rem);position:relative}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.hero h1 .w>span{display:inline-block;transform:translateY(110%);animation:rise 1s var(--ease) forwards}
+@keyframes rise{to{transform:none}}
+.hero h1 .w:nth-child(1)>span{animation-delay:.05s}.hero h1 .w:nth-child(2)>span{animation-delay:.15s}.hero h1 .w:nth-child(3)>span{animation-delay:.25s}.hero h1 .w:nth-child(4)>span{animation-delay:.35s}.hero h1 .w:nth-child(5)>span{animation-delay:.45s}.hero h1 .w:nth-child(6)>span{animation-delay:.55s}
+.hero h1 em{font-style:normal;color:var(--ox)}
+.hero-sub{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;margin-top:2.5rem}
+.hero-img{margin-top:3.5rem}
+.hero-img .photo{aspect-ratio:21/9;border-radius:6px}
+@media (max-width:860px){.hero-sub{grid-template-columns:1fr}.hero-img .photo{aspect-ratio:4/3}}
+
+/* two-col */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.g2>*{min-width:0}
+.g2.c{align-items:center}
+@media (max-width:860px){.g2{grid-template-columns:1fr;gap:2rem}}
+
+/* paired photos: side by side at every width, second one offset */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.duo>:nth-child(2){margin-top:4rem}
+@media (max-width:860px){.duo{gap:.875rem}.duo>:nth-child(2){margin-top:2.5rem}.duo .photo .cap{font-size:.65rem;padding:.6rem .7rem}}
+
+/* books */
+.books{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+@media (max-width:860px){.books{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.books{grid-template-columns:1fr}}
+.book{text-decoration:none;display:block;perspective:1200px}
+.book .cover{position:relative;aspect-ratio:5/7;border-radius:3px;overflow:hidden;background:var(--ink);color:var(--on-ink);transform-style:preserve-3d;transition:transform .7s var(--ease),box-shadow .7s var(--ease);box-shadow:0 1px 0 var(--line),12px 14px 0 var(--paper-2)}
+.book:hover .cover{transform:rotateY(-10deg) rotateX(4deg) translateY(-8px);box-shadow:0 1px 0 var(--line),22px 26px 0 var(--paper-2)}
+.book .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.book .cover .fb{position:absolute;inset:0;padding:1.25rem;display:flex;flex-direction:column;justify-content:space-between;background:var(--ink);font-weight:700;font-size:1.35rem;letter-spacing:-.02em;line-height:1.05}
+.book .cover .fb small{font-weight:500;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--on-ink-mute)}
+.book .cover .fb.ox{background:var(--ox)}
+.book .meta{padding-top:1.1rem;display:grid;grid-template-columns:1fr auto;gap:.5rem 1rem;align-items:start}
+.book .meta h3{grid-column:1/-1}
+.book .meta .by{margin:0;color:var(--mute)}
+.book .meta .price{font-weight:700;white-space:nowrap}
+.band.ink .book .meta .by{color:var(--on-ink-mute)}
+.band.ink .book .cover{box-shadow:0 1px 0 rgba(255,255,255,.1),12px 14px 0 var(--ink-2)}
+.band.ink .book:hover .cover{box-shadow:0 1px 0 rgba(255,255,255,.1),22px 26px 0 var(--ink-2)}
+
+/* numbered rows */
+.rows{border-top:1.5px solid currentColor}
+.row{display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;padding:1.6rem 0;border-bottom:1px solid var(--line);text-decoration:none;transition:padding-left .4s var(--ease)}
+.band.ink .row{border-bottom-color:rgba(242,235,221,.18)}
+a.row:hover{padding-left:.75rem}
+.row .n{font-weight:700;font-size:.95rem;letter-spacing:.06em;color:var(--mute)}
+.band.ink .row .n{color:var(--on-ink-mute)}
+.row h3{font-size:clamp(1.5rem,3.4vw,2.8rem);letter-spacing:-.03em}
+.row .r{color:var(--mute);font-size:.95rem;white-space:nowrap}
+.band.ink .row .r{color:var(--on-ink-mute)}
+.rows.lab .row{grid-template-columns:9rem 1fr}
+@media (max-width:640px){.row,.rows.lab .row{grid-template-columns:1fr;gap:.5rem}}
+
+/* status */
+.status{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;border:1.5px solid currentColor;border-radius:4px;padding:1.4rem 1.6rem}
+.status .dot{width:12px;height:12px;border-radius:50%;background:var(--ox);flex:none;box-shadow:0 0 0 0 var(--ox);animation:pulse 2.4s ease-out infinite}
+.status .dot.open{background:#2F8F4E;box-shadow:0 0 0 0 #2F8F4E}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,currentColor 0%,transparent)}70%{box-shadow:0 0 0 12px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.status .t{flex:1;min-width:220px}
+.status .t p{margin:0}
+.status .t strong{display:block;font-size:1.15rem;letter-spacing:-.01em}
+
+/* guide */
+.guide h3{margin:2.25rem 0 .6rem}
+.guide h3:first-child{margin-top:0}
+.guide ul{padding-left:1.1rem;margin:0 0 1em;max-width:60ch}
+.guide li{margin-bottom:.45em}
+.guide ol{padding-left:1.3rem;margin:0 0 1em;max-width:60ch}
+.guide ol>li{margin-bottom:.9em}
+.guide ol ul{margin:.5em 0 0}
+.check{list-style:none;padding-left:0!important}
+.check li{position:relative;padding-left:1.9rem}
+.check li::before{content:"";position:absolute;left:0;top:.3em;width:1rem;height:1rem;border:1.5px solid currentColor;border-radius:3px}
+.panel .check li::before{border-color:var(--on-ink-mute)}
+.reward{font-size:clamp(2.6rem,6vw,4.8rem);font-weight:700;letter-spacing:-.04em;line-height:1;margin:0 0 .4rem}
+.spec{display:grid;grid-template-columns:minmax(120px,auto) 1fr;gap:.6rem 1.5rem;margin:0 0 1.25em;max-width:60ch}
+.spec dt{color:var(--mute)}.spec dd{margin:0}
+.band.ink .spec dt{color:var(--on-ink-mute)}
+.panel{background:var(--ink);color:var(--on-ink);padding:2rem;border-radius:4px}
+.panel .mute{color:var(--on-ink-mute)}
+.panel .spec dt{color:var(--on-ink-mute)}
+.panel .btn{background:var(--on-ink);color:var(--ink);border-color:var(--on-ink)}
+.panel .btn:hover{background:var(--ox);color:var(--on-ink);border-color:var(--ox)}
+.ph{background:rgba(184,50,30,.14);border-bottom:2px solid var(--ox);padding:0 .3rem}
+.band.ink .ph{background:rgba(242,235,221,.1);border-bottom-color:var(--on-ink)}
+blockquote{margin:0 0 2.25rem;max-width:60ch}
+blockquote p{font-size:clamp(1.15rem,1.7vw,1.5rem);line-height:1.35;letter-spacing:-.015em;font-weight:500;margin-bottom:.6rem}
+blockquote p::before{content:"“";color:var(--ox);margin-right:.15rem}
+blockquote cite{font-style:normal;color:var(--mute);font-size:.95rem}
+.band.ink blockquote cite{color:var(--on-ink-mute)}
+
+/* submit: facts, steps, fine print */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.facts>div{padding:1.75rem 1.5rem 1.75rem 0;display:flex;flex-direction:column;gap:.4rem}
+.facts>div+div{padding-left:1.5rem;border-left:1px solid var(--line)}
+.facts b{font-size:clamp(2.2rem,4.5vw,3.6rem);letter-spacing:-.04em;line-height:1}
+.facts span{color:var(--mute)}
+@media (max-width:760px){.facts{grid-template-columns:1fr 1fr}.facts>div:nth-child(3){padding-left:0;border-left:0}.facts>div:nth-child(n+3){border-top:1px solid var(--line)}}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;counter-reset:s}
+.steps li{counter-increment:s;border-top:1.5px solid var(--ink);padding-top:1.25rem}
+.steps li::before{content:"0" counter(s);display:block;font-weight:700;color:var(--ox);letter-spacing:.06em;margin-bottom:.75rem}
+.steps h3{margin-bottom:.6rem}
+.steps p{margin:0}
+.steps.four{grid-template-columns:repeat(4,1fr)}
+.band.ink .steps li{border-top-color:var(--on-ink-mute)}
+@media (max-width:860px){.steps,.steps.four{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.steps,.steps.four{grid-template-columns:1fr}}
+.plain{list-style:none;padding:0;margin:1.5rem 0;border-top:1.5px solid var(--ink)}
+.plain li{padding:.9rem 0;border-bottom:1px solid var(--line);font-size:1.15rem}
+.more details{border-bottom:1px solid var(--line)}
+.more details:first-child{border-top:1.5px solid var(--ink)}
+.more summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.25rem 0;font-weight:600;font-size:clamp(1.15rem,1.8vw,1.4rem);letter-spacing:-.015em}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";font-size:1.6rem;font-weight:500;color:var(--ox);transition:transform .3s var(--ease)}
+.more details[open] summary::after{transform:rotate(45deg)}
+.more ul{padding-left:1.1rem;margin:0 0 1.25rem}
+.more li{margin-bottom:.5em}
+.more p{margin:0 0 1.25rem}
+
+/* photo placeholder */
+.photo.blank{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;background:var(--paper-2);color:#D2D2CC;border:1.5px dashed rgba(21,19,15,.18)}
+.photo.blank svg{width:64px;height:64px}
+.photo.blank span{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.band.ink .photo.blank{background:var(--ink-2);color:#3A362F;border-color:rgba(255,255,255,.15)}
+.band.ink .photo.blank span{color:var(--on-ink-mute)}
+
+/* authors */
+.author{display:grid;grid-template-columns:260px 1fr;gap:2.5rem;align-items:start;padding:3rem 0;border-top:1.5px solid var(--ink)}
+.author .photo{aspect-ratio:1}
+.author h3{font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:.4rem}
+@media (max-width:700px){.author{grid-template-columns:1fr}}
+
+/* contact */
+.contact a{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;text-decoration:none;font-size:clamp(1.3rem,2.5vw,2rem);font-weight:600;letter-spacing:-.02em;padding:1.25rem 0;border-bottom:1px solid var(--line)}
+.contact a:first-child{border-top:1.5px solid var(--ink)}
+.contact a small{font-weight:500;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.contact a:hover{color:var(--ox)}
+
+/* big cta */
+.bigcta h2{font-size:clamp(2.6rem,8vw,7rem)}
+.bigcta .wrap{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end}
+@media (max-width:860px){.bigcta .wrap{grid-template-columns:1fr}}
+
+footer{position:relative;z-index:2;background:var(--ink);color:var(--on-ink-mute);padding-block:3rem 2.5rem;border-top:1px solid rgba(242,235,221,.15);font-size:.95rem}
+footer .cols{display:flex;flex-wrap:wrap;gap:2rem 4rem;justify-content:space-between;align-items:flex-start}
+footer .brand{color:var(--on-ink)}
+footer nav{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem}
+footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
+.page{display:none}.page.show{display:block}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="cat" viewBox="0 0 64 64"><path d="M10 54V22l12 8h20l12-8v32H10z" fill="currentColor"/><path d="M10 22l4-14 10 12M54 22l-4-14-10 12" fill="currentColor"/><ellipse cx="24" cy="38" rx="3" ry="5" fill="#FFFFFF"/><ellipse cx="40" cy="38" rx="3" ry="5" fill="#FFFFFF"/></symbol>
+
+</defs></svg>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home"><svg class="cat"><use href="#cat"/></svg>Felis Catus Press</a>
+    <nav class="links" id="links">
+      <a href="#home"><span class="fx"><span>Home</span><span>Home</span></span></a>
+      <a href="#about"><span class="fx"><span>About</span><span>About</span></span></a>
+      <a href="#prize"><span class="fx"><span>The Prize</span><span>The Prize</span></span></a>
+      <a href="#books"><span class="fx"><span>Books</span><span>Books</span></span></a>
+      <a href="#authors"><span class="fx"><span>Authors</span><span>Authors</span></span></a>
+      <a href="#contact"><span class="fx"><span>Contact</span><span>Contact</span></span></a>
+      <a class="m-only" href="#submit">Submit a manuscript</a>
+    </nav>
+    <a class="btn" href="#submit"><span class="fx"><span>Submit a manuscript</span><span>Submit a manuscript</span></span></a>
+    <button class="menu" id="menu" aria-expanded="false" aria-controls="links">Menu</button>
+  </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<article class="page" id="home">
+  <section class="hero band">
+    <div class="wrap">
+      <h1><span class="w"><span>Poems</span></span> <span class="w"><span>we</span></span> <span class="w"><span><em>love,</em></span></span><br><span class="w"><span>printed</span></span> <span class="w"><span>with</span></span> <span class="w"><span>claws.</span></span></h1>
+      <div>
+        <div class="hero-sub">
+          <div>
+            <p class="lead">Felis Catus Press publishes the finest poetry from Nigeria. No submission fee, no publishing cost, one window every March.</p>
+            <div class="actions">
+              <a class="btn" href="#books"><span class="fx"><span>Browse the books</span><span>Browse the books</span></span></a>
+              <a class="btn ghost" href="#submit"><span class="fx"><span>How to submit</span><span>How to submit</span></span></a>
+            </div>
+          </div>
+          </div>
+        <div class="rv hero-img">
+          <div class="photo"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=75" alt="A hand writing in a notebook with a fountain pen" loading="eager"><span class="cap">Manuscripts open 1–31 March</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="track" id="track">
+    <span>Publishing the finest poetry from Nigeria</span><span>Submissions open every March</span><span>No fees, ever</span><span>Royalties paid every six months</span><span>The Osundare–Ipadeola Poetry Book Prize</span><span>Prize entries open 15 December</span><span>Mainstream poems and traditional haibun</span>
+  </div></div>
+
+  <section class="band ink">
+    <div class="wrap">
+      <div class="g2 rv" style="margin-bottom:3rem">
+        <div><h2>Five collections, out now.</h2></div>
+        <p class="lead mute" style="align-self:end">₦3,500 each. Orders are completed on WhatsApp. We will endeavour to make our books available at Rovingheights, Ouida Books and Book O' Clock.</p>
+      </div>
+      <div class="books rv">
+        <a class="book" href="#book-rainbow">
+          <div class="cover"><div class="fb"><small>Felis Catus Press</small>The Rainbow Is Not as Beautiful as My Ruins</div><img src="covers/the-rainbow-is-not-as-beautiful-as-my-ruins.jpg" alt="" onerror="this.remove()"></div>
+          <div class="meta"><h3>The Rainbow Is Not as Beautiful as My Ruins</h3><p class="by">Adamu Yahuza Abdullahi</p><span class="price">₦3,500</span></div>
+        </a>
+        <a class="book" href="#book-children">
+          <div class="cover"><div class="fb ox"><small>Felis Catus Press</small>Children of the Soil</div><img src="covers/children-of-the-soil.jpg" alt="" onerror="this.remove()"></div>
+          <div class="meta"><h3>Children of the Soil</h3><p class="by">Wisdom Adediji</p><span class="price">₦3,500</span></div>
+        </a>
+        <a class="book" href="#book-holocaust">
+          <div class="cover"><div class="fb"><small>Felis Catus Press</small>Holocaust</div><img src="covers/holocaust.jpg" alt="" onerror="this.remove()"></div>
+          <div class="meta"><h3>Holocaust</h3><p class="by">Henry Opeyemi</p><span class="price">₦3,500</span></div>
+        </a>
+        <a class="book" href="#book-psalmic">
+          <div class="cover"><div class="fb ox"><small>Felis Catus Press</small>The Psalmic Field</div><img src="covers/the-psalmic-field.jpg" alt="" onerror="this.remove()"></div>
+          <div class="meta"><h3>The Psalmic Field</h3><p class="by">Ridwan Àdìsá Fasasi</p><span class="price">₦3,500</span></div>
+        </a>
+        <a class="book" href="#book-road">
+          <div class="cover"><div class="fb"><small>Felis Catus Press</small>The Road Is a Body</div><img src="covers/the-road-is-a-body.jpg" alt="" onerror="this.remove()"></div>
+          <div class="meta"><h3>The Road Is a Body</h3><p class="by">Okoli Stephen Nonso</p><span class="price">₦3,500</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap g2 c rv">
+      <div><div class="photo" style="aspect-ratio:4/3"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1400&q=75" alt="Tall library shelves lined with books" loading="lazy"><span class="cap">The Prize</span></div></div>
+      <div>
+        <h2>The Osundare–Ipadeola Poetry Book Prize</h2>
+        <p class="lead mute" style="margin-top:1.25rem">An annual prize named for Professor Niyi Osundare and Sir Tade Ipadeola. The winning full-length manuscript receives ₦150,000 and a publishing contract with Felis Catus Press. Entries open 15 December 2026.</p>
+        <div class="actions"><a class="btn" href="#prize"><span class="fx"><span>About the prize</span><span>About the prize</span></span></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band ox">
+    <div class="wrap g2 rv">
+      <div><h2>One window a year. Every poet. No fees.</h2></div>
+      <div style="align-self:end">
+        <p class="lead">We read chapbook manuscripts of 20–30 poems from Nigerians and poets resident in Nigeria throughout March, and announce accepted collections in August.</p>
+        <div class="status" id="status-home"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="g2 rv" style="margin-bottom:2.5rem">
+        <div><h2>Work we keep returning to.</h2></div>
+        <p class="lead mute" style="align-self:end">Poets whose craft shaped our taste. Read more about each of them.</p>
+      </div>
+      <div class="rows rv">
+        <a class="row" href="https://www.thenigeriaprizes.org/profile/tade-ipadeola/" target="_blank" rel="noopener"><h3>Tade Ipadeola</h3><span class="r">The Nigeria Prize</span></a>
+        <a class="row" href="https://www.poetryfoundation.org/poets/hussain-ahmed" target="_blank" rel="noopener"><h3>Hussain Ahmed</h3><span class="r">Poetry Foundation</span></a>
+        <a class="row" href="https://www.poetryfoundation.org/poets/adedayo-agarau" target="_blank" rel="noopener"><h3>Adedayo Agarau</h3><span class="r">Poetry Foundation</span></a>
+        <a class="row" href="https://haikupedia.org/article-haikupedia/rich-youmans/" target="_blank" rel="noopener"><h3>Rich Youmans</h3><span class="r">Haikupedia</span></a>
+        <a class="row" href="https://haikupedia.org/article-haikupedia/barnabas-ikeoluwa-adeleke/" target="_blank" rel="noopener"><h3>Barnabas Adeleke</h3><span class="r">Haikupedia</span></a>
+        <a class="row" href="https://porterhousereview.org/authors/taofeek-ayeyemi/" target="_blank" rel="noopener"><h3>Taofeek Ayeyemi</h3><span class="r">Porter House Review</span></a>
+      </div>
+    </div>
+  </section>
+</article>
+
+<!-- ABOUT -->
+<article class="page" id="about">
+  <section class="hero band">
+    <div class="wrap">
+      <h1><span class="w"><span>Fresh</span></span> <span class="w"><span>like</span></span> <span class="w"><span>today's</span></span><br><span class="w"><span><em>bread.</em></span></span></h1>
+      <div class="g2" style="margin-top:3rem">
+        <p class="lead">Felis Catus Press is an independent traditional publishing firm in Nigeria, established in 2024. It is an imprint of Nimble House, a creative firm rendering writing and publishing services.</p>
+        <div>
+          <p>Felis Catus is the scientific name for cats, the only animals that pay the toll fee when descending from heaven. Our wish is therefore to publish poetry that exudes the alertness and quickness of a cat's motion, the sharpness of their eyes, and the emotion of their intimacy.</p>
+          <p>Through our authors, we seek to teach you something you didn't know, something new and novel, but original and crude in its uniqueness.</p>
+          <p>We are dedicated to the publication and promotion of poetry written in the finest of craft, poetry enriched with natural and cultural condiments. To us, poetry includes mainstream poems and traditional haibun.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band" style="padding-top:0">
+    <div class="wrap duo rv">
+      <div><div class="photo" style="aspect-ratio:4/5"><img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=1200&q=75" alt="A cat watching intently" loading="lazy"><span class="cap">Felis catus</span></div></div>
+      <div><div class="photo" style="aspect-ratio:4/5"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=1200&q=75" alt="An open book on a wooden table" loading="lazy"><span class="cap">Nimble House</span></div></div>
+    </div>
+  </section>
+  <section class="band ink">
+    <div class="wrap">
+      <div class="rows lab rv">
+        <div class="row"><span class="r">Bookstores</span><h3>Rovingheights · Ouida Books · Book O' Clock</h3></div>
+        <div class="row"><span class="r">Our team</span><h3>Fresh like today's bread, we are the scions of the soil.</h3></div>
+        <div class="row"><span class="r">Imprint of</span><h3>Nimble House, writing &amp; publishing services</h3></div>
+      </div>
+      <p class="mute" style="margin-top:1.5rem">We will endeavour to make our books available at the bookstores above.</p>
+    </div>
+  </section>
+</article>
+
+<!-- SUBMIT -->
+<article class="page" id="submit">
+  <section class="hero band">
+    <div class="wrap">
+      <h1><span class="w"><span>Teach</span></span> <span class="w"><span>us</span></span> <span class="w"><span>something</span></span><br><span class="w"><span>we</span></span> <span class="w"><span>didn't</span></span> <span class="w"><span><em>know.</em></span></span></h1>
+      <div class="g2" style="margin-top:3rem">
+        <p class="lead">Send us a chapbook manuscript. We offer 100% traditional publishing: no submission fee, no publishing cost.</p>
+        <div class="status" id="status-submit"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="facts rv">
+        <div><b>20–30</b><span>poems, 25–40 pages</span></div>
+        <div><b>March</b><span>the only open month</span></div>
+        <div><b>3–7</b><span>previously published poems</span></div>
+        <div><b>₦0</b><span>to submit or publish</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <h2 class="rv" style="margin-bottom:2.5rem">Three steps.</h2>
+      <ol class="steps rv">
+        <li>
+          <h3>Prepare</h3>
+          <p>Your poems only, with the title on the first page and no personal information. Garamond, 12.5 pt, single-spaced, saved as a Word document.</p>
+        </li>
+        <li>
+          <h3>Email</h3>
+          <p>Send it to <strong>feliscatuspress@gmail.com</strong>. Subject: your name and manuscript title. In the email, give your contact details and list which poems were published before, and where.</p>
+        </li>
+        <li>
+          <h3>Hear back</h3>
+          <p>We read every manuscript sent in March and announce accepted collections in August.</p>
+        </li>
+      </ol>
+      <div class="actions rv"><a class="btn" href="mailto:feliscatuspress@gmail.com"><span class="fx"><span>Email your manuscript</span><span>Email your manuscript</span></span></a></div>
+    </div>
+  </section>
+
+  <section class="band ink">
+    <div class="wrap g2 rv">
+      <div>
+        <h2>What we look for.</h2>
+      </div>
+      <div>
+        <p class="lead">Your history and heritage: personal, yet specific and generic. Poetry with the alertness of a cat's motion, the sharpness of their eyes, the emotion of their intimacy.</p>
+        <p class="mute">No set theme. Just quality poems in a collection that is coherent, concise and clear.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap g2 rv">
+      <div><h2>The fine print.</h2><p class="mute" style="margin-top:1rem">Open any section for the details.</p></div>
+      <div class="more">
+        <details>
+          <summary>Who can submit</summary>
+          <ul>
+            <li>Nigerians, or poets of any nationality resident in Nigeria.</li>
+            <li>One manuscript per submission window.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Simultaneous submissions &amp; resubmitting</summary>
+          <ul>
+            <li>Simultaneous submissions are welcome. If your manuscript is accepted elsewhere, tell us promptly in the same email thread.</li>
+            <li>Please don't resubmit a rejected manuscript. You may send a different one in a later window. Occasionally we invite an author to resubmit a collection that thrilled us.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>If we publish you</summary>
+          <ul>
+            <li>10 free author copies; further copies at 35% off.</li>
+            <li>A print run of 100–150 copies.</li>
+            <li>Royalties after production costs: 30% to you, 70% to the press, paid every 6 months. Not payable on author-purchased copies.</li>
+            <li>Bookstores and individuals buying 5 or more copies get 30% off.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Have a full-length collection?</summary>
+          <p>For manuscripts of 45–60 poems, enter <a href="#prize">the Osundare–Ipadeola Poetry Book Prize</a>.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</article>
+<!-- PRIZE -->
+<article class="page" id="prize">
+  <section class="hero band ink">
+    <div class="wrap">
+      <h1 style="font-size:clamp(2.6rem,8vw,7.5rem)"><span class="w"><span>The</span></span> <span class="w"><span>Osundare–</span></span><span class="w"><span>Ipadeola</span></span><br><span class="w"><span>Poetry</span></span> <span class="w"><span>Book</span></span> <span class="w"><span>Prize</span></span></h1>
+      <div class="g2" style="margin-top:3rem">
+        <p class="lead mute">An annual prize for outstanding full-length poetry manuscripts, named in honour of Professor Niyi Osundare and Sir Tade Ipadeola.</p>
+        <div class="status" id="status-prize"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="facts rv">
+        <div><b>₦150k</b><span>prize money, plus a publishing contract</span></div>
+        <div><b>45–60</b><span>poems, 60–70 pages</span></div>
+        <div><b>1st–3rd</b><span>full-length collection</span></div>
+        <div><b>₦0</b><span>to enter</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap g2 c rv">
+      <div><div class="photo" style="aspect-ratio:4/3"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=75" alt="A row of books with golden light on their spines" loading="lazy"><span class="cap">Inaugural edition</span></div></div>
+      <div>
+        <h2>What the winner receives.</h2>
+        <ul class="plain">
+          <li><b>₦150,000</b> in prize money</li>
+          <li>A <b>publishing contract</b> with Felis Catus Press</li>
+          <li><b>Ten author's copies</b> of the published book</li>
+          <li><b>Royalties</b> under the contract terms</li>
+        </ul>
+        <p class="mute">A book conversation and unveiling ceremony may also be organised.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band ink">
+    <div class="wrap">
+      <h2 class="rv" style="margin-bottom:2.5rem">Key dates.</h2>
+      <ol class="steps four rv">
+        <li><h3>15 Dec 2026</h3><p class="mute">Submissions open</p></li>
+        <li><h3>15 Mar 2027</h3><p class="mute">Deadline</p></li>
+        <li><h3>15 Jun 2027</h3><p class="mute">Winner announced</p></li>
+        <li><h3>15 Aug 2027</h3><p class="mute">Book published</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2 class="rv" style="margin-bottom:2.5rem">How to enter.</h2>
+      <ol class="steps rv">
+        <li>
+          <h3>Check you're eligible</h3>
+          <p>Nigerian citizens anywhere, or poets of any nationality living in Nigeria, aged 18+, with no more than three full-length collections published.</p>
+        </li>
+        <li>
+          <h3>Prepare</h3>
+          <p>45–60 poems with a title page, contents and acknowledgements. Times New Roman 12 pt, single-spaced. No name or personal details inside.</p>
+        </li>
+        <li>
+          <h3>Email</h3>
+          <p>Send it to <strong>theosundareipadeolaprize@gmail.com</strong> with your cover letter and a bio of up to 150 words in the email body.</p>
+        </li>
+      </ol>
+      <div class="actions rv"><a class="btn" href="mailto:theosundareipadeolaprize@gmail.com?subject=Osundare-Ipadeola%20Poetry%20Book%20Prize%20entry"><span class="fx"><span>Email your entry</span><span>Email your entry</span></span></a></div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap g2 rv">
+      <div><h2>The fine print.</h2><p class="mute" style="margin-top:1rem">Open any section for the details.</p></div>
+      <div class="more">
+        <details>
+          <summary>About the prize</summary>
+          <p>The Prize celebrates the vitality, range, and possibilities of contemporary poetry. It seeks manuscripts that show artistic ambition, originality, imaginative power, technical accomplishment, and a distinctive engagement with language and experience.</p>
+          <p>It welcomes poetry that takes creative risks and offers fresh ways of encountering the world. No particular theme or school of poetry is prescribed. Beyond the win, the Prize is committed to helping excellent poetry reach readers through publication and engagement with the literary community.</p>
+        </details>
+        <details>
+          <summary>Eligibility in full</summary>
+          <ul>
+            <li>Nigerian citizens living in Nigeria or abroad.</li>
+            <li>Poets of any nationality who reside in Nigeria.</li>
+            <li>At least 18 years old at the time of submission.</li>
+            <li>Poets publishing their first, second, or third full-length collection. Four or more published full-length collections makes you ineligible.</li>
+            <li>Chapbooks don't count towards that total; self-published full-length collections do.</li>
+            <li>Poems already published in journals, magazines, anthologies or online are fine.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Manuscript requirements</summary>
+          <ul>
+            <li>A complete manuscript not yet published as a book.</li>
+            <li>45–60 poems, 60–70 pages including the title page, table of contents and any acknowledgements page.</li>
+            <li>A title page and table of contents.</li>
+            <li>An acknowledgements page listing poems published elsewhere, where applicable.</li>
+            <li>No author name, contact details, biography or other identifying details anywhere.</li>
+            <li>12 pt Times New Roman, single-spaced, one-inch margins. Poems that need special formatting may depart from this.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>What goes in your email</summary>
+          <ul>
+            <li>Full name, email address and telephone number.</li>
+            <li>Current location and full postal address.</li>
+            <li>A short author biography, up to 150 words.</li>
+            <li>A brief note of where any poems in the manuscript have previously appeared.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Simultaneous submissions</summary>
+          <p>Permitted. If your manuscript is accepted elsewhere while under consideration, notify the Prize promptly and withdraw it by email.</p>
+        </details>
+        <details>
+          <summary>Judging</summary>
+          <ul>
+            <li>Readers at Felis Catus Press read all eligible entries and forward a longlist to the judges.</li>
+            <li>The judges select the finalists and the winner.</li>
+            <li>Only the finalist(s) and winner are announced publicly. The longlist is not published.</li>
+            <li>Inaugural judges: names and biographies to be announced.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Governing Board</summary>
+          <p>A Governing Board supports the Prize's administration, sustainability and long-term development, and provides oversight to protect its integrity. Selecting the winner remains the judges' responsibility. The inaugural Board will be announced here.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band ink">
+    <div class="wrap g2 rv">
+      <div><h2>Sponsor or partner with the Prize.</h2></div>
+      <div>
+        <p class="lead">We welcome individuals, foundations, cultural organisations, educational institutions and responsible businesses committed to Nigerian poetry and reading culture.</p>
+        <p class="mute">Sponsors and partners will be acknowledged here as partnerships are confirmed. This is the inaugural edition, so there are no past winners yet.</p>
+        <div class="actions"><a class="btn" href="mailto:feliscatuspress@gmail.com?subject=Osundare-Ipadeola%20Poetry%20Book%20Prize"><span class="fx"><span>Enquire about the prize</span><span>Enquire about the prize</span></span></a></div>
+      </div>
+    </div>
+  </section>
+</article>
+<!-- BOOKS -->
+<article class="page" id="books">
+  <section class="hero band">
+    <div class="wrap">
+      <h1><span class="w"><span>Our</span></span> <span class="w"><span><em>books.</em></span></span></h1>
+      <p class="lead mute" style="margin-top:2rem">Books published by Felis Catus Press. Each is ₦3,500; orders are completed on WhatsApp.</p>
+    </div>
+  </section>
+  <section class="band" style="padding-top:0">
+    <div class="wrap books rv">
+      <a class="book" href="#book-rainbow">
+        <div class="cover"><div class="fb"><small>Felis Catus Press</small>The Rainbow Is Not as Beautiful as My Ruins</div><img src="covers/the-rainbow-is-not-as-beautiful-as-my-ruins.jpg" alt="" onerror="this.remove()"></div>
+        <div class="meta"><h3>The Rainbow Is Not as Beautiful as My Ruins</h3><p class="by">Adamu Yahuza Abdullahi</p><span class="price">₦3,500</span></div>
+      </a>
+      <a class="book" href="#book-children">
+        <div class="cover"><div class="fb ox"><small>Felis Catus Press</small>Children of the Soil</div><img src="covers/children-of-the-soil.jpg" alt="" onerror="this.remove()"></div>
+        <div class="meta"><h3>Children of the Soil</h3><p class="by">Wisdom Adediji</p><span class="price">₦3,500</span></div>
+      </a>
+      <a class="book" href="#book-holocaust">
+        <div class="cover"><div class="fb"><small>Felis Catus Press</small>Holocaust</div><img src="covers/holocaust.jpg" alt="" onerror="this.remove()"></div>
+        <div class="meta"><h3>Holocaust</h3><p class="by">Henry Opeyemi</p><span class="price">₦3,500</span></div>
+      </a>
+      <a class="book" href="#book-psalmic">
+        <div class="cover"><div class="fb ox"><small>Felis Catus Press</small>The Psalmic Field</div><img src="covers/the-psalmic-field.jpg" alt="" onerror="this.remove()"></div>
+        <div class="meta"><h3>The Psalmic Field</h3><p class="by">Ridwan Àdìsá Fasasi</p><span class="price">₦3,500</span></div>
+      </a>
+      <a class="book" href="#book-road">
+        <div class="cover"><div class="fb"><small>Felis Catus Press</small>The Road Is a Body</div><img src="covers/the-road-is-a-body.jpg" alt="" onerror="this.remove()"></div>
+        <div class="meta"><h3>The Road Is a Body</h3><p class="by">Okoli Stephen Nonso</p><span class="price">₦3,500</span></div>
+      </a>
+    </div>
+  </section>
+</article>
+
+<!-- BOOK: RAINBOW -->
+<article class="page" id="book-rainbow">
+  <section class="hero band">
+    <div class="wrap g2 c">
+      <div class="book" style="max-width:420px"><div class="cover"><div class="fb"><small>Felis Catus Press</small>The Rainbow Is Not as Beautiful as My Ruins</div><img src="covers/the-rainbow-is-not-as-beautiful-as-my-ruins.jpg" alt="Cover of The Rainbow Is Not as Beautiful as My Ruins" onerror="this.remove()"></div></div>
+      <div>
+        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">The Rainbow Is Not as Beautiful as My Ruins</h1>
+        <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Adamu Yahuza Abdullahi</a></p>
+        <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
+        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Rainbow%20Is%20Not%20as%20Beautiful%20as%20My%20Ruins%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
+      </div>
+    </div>
+  </section>
+  <section class="band ink">
+    <div class="wrap g2 rv">
+      <div>
+        <blockquote><p>Yahuza philosophizes, he grieves, he wishes, he sings like any mourning person would a dirge.</p><cite>Michael Imossan, winner of the Sillerman First Book Prize for African Poetry, 2024</cite></blockquote>
+        <blockquote><p>Because grieving is another form of love, Adamu Yahuza's The Rainbow is Not as Beautiful as My Ruins serves as an homage to his late brother, written in profound language.</p><cite>Zaynab Iliyasu Bobi, author of Cadaver of Red Roses (Derricotte/Eady Chapbook Prize 2024)</cite></blockquote>
+        <blockquote><p>With tender ferocity, Abdullahi navigates the abyss left by the departure of a beloved brother, laying bare the brutal beauty of bereavement. These verses make the reader tremble in vulnerability.</p><cite>Bà Sabouke, author of Meccan Spring</cite></blockquote>
+        <blockquote><p>There is something so personal in "the rainbow is not as beautiful as my ruins" that feels like the poet is narrating our own experiences. The poet finds poetic ways to express his grief, telling the story of loss in a language that resonates with us all, and in clear, crisp images.</p><cite>Taofeek Ayeyemi, author of Tongueless Secrets</cite></blockquote>
+      </div>
+      <div>
+        <div style="margin-bottom:1.5rem"><div class="photo" style="aspect-ratio:1"><img src="https://feliscatuspress.weebly.com/uploads/1/4/7/3/147392495/editor/1002384002.jpg" alt="Adamu Yahuza Abdullahi" loading="lazy"><span class="cap">Adamu Yahuza Abdullahi</span></div></div>
+        <p><strong>Adamu Yahuza Abdullahi</strong>, THE PLOB, TPC V, whose works have appeared in Lolwe, Strange Horizons, Chestnut Review, A Long House, Rough Cut Press, The Temz Review, and other places, is a poet from Borgu, Nigeria. He is a pioneer resident of Muktar Aliyu Art Residency, Minna, Niger State. He is a finalist of the 2024 Garden Party Collective chapbook contest, a Best of the Net nominee, and second-place winner of both the first edition of the Hassan Sulaiman Gimba Esq Poetry Prize and the Bill Ward Poetry Prize for Emerging Writers 2023. He is a graduate of Usmanu Danfodiyo University, Sokoto.</p>
+        <p class="mute">X <a href="https://x.com/yahuza_theplob" target="_blank" rel="noopener">@yahuza_theplob</a> · Instagram <a href="https://instagram.com/Official_yahuzeey" target="_blank" rel="noopener">@Official_yahuzeey</a></p>
+      </div>
+    </div>
+  </section>
+</article>
+
+<!-- BOOK: CHILDREN -->
+<article class="page" id="book-children">
+  <section class="hero band">
+    <div class="wrap g2 c">
+      <div class="book" style="max-width:420px"><div class="cover"><div class="fb ox"><small>Felis Catus Press</small>Children of the Soil</div><img src="covers/children-of-the-soil.jpg" alt="Cover of Children of the Soil" onerror="this.remove()"></div></div>
+      <div>
+        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">Children of the Soil</h1>
+        <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Wisdom Adediji</a></p>
+        <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
+        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20Children%20of%20the%20Soil%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
+      </div>
+    </div>
+  </section>
+  <section class="band ink">
+    <div class="wrap g2 rv">
+      <div>
+        <blockquote><p>Wisdom's images stun, deject, and (when he wills) inspire hope. Most importantly, these poems pass the litmus test of Dickinson's famed saying "If I feel physically as if the top of my head were taken off, I know that is poetry." Reading these poems, I felt as such over and over. So will you.</p><cite>Pamilerin Jacob, author of Cordial with Disillusionment</cite></blockquote>
+        <blockquote><p>Wisdom's debut wears the earthiness of time and intent. This brilliant collection is a cursive junction where the self's struggles meet the shared ones, the past flows into the present, the child questioning the man he became.</p><cite>Olumide Manuel, author of Hope Monger</cite></blockquote>
+        <blockquote><p>One thing about "Children of the Soil" is its unique voice. It tells the story of different tribes of a nation, united by experience: the witnesses of slavery, both from outside and within. The manuscript takes us back in time, and leads us to the future through the unsteady present.</p><cite>Taofeek Ayeyemi, author of Tongueless Secrets</cite></blockquote>
+      </div>
+      <div>
+        <div style="margin-bottom:1.5rem"><div class="photo" style="aspect-ratio:1"><img src="https://feliscatuspress.weebly.com/uploads/1/4/7/3/147392495/1002383998_orig.jpg" alt="Wisdom Adediji" loading="lazy"><span class="cap">Wisdom Adediji</span></div></div>
+        <p><strong>Wisdom Adediji</strong>, NGP XI, is a Nigerian genre-bending writer. His works have appeared on Icefloe Press, Blue Press, NND Poetry Column and elsewhere. He is a poetry editor at Candid Review. He currently studies geography at the University of Ibadan and writes from there.</p>
+        <p class="mute">X <a href="https://x.com/wisdomadediji" target="_blank" rel="noopener">@wisdomadediji</a></p>
+      </div>
+    </div>
+  </section>
+</article>
+
+<!-- BOOK: HOLOCAUST -->
+<article class="page" id="book-holocaust">
+  <section class="hero band">
+    <div class="wrap g2 c">
+      <div class="book" style="max-width:420px"><div class="cover"><div class="fb"><small>Felis Catus Press</small>Holocaust</div><img src="covers/holocaust.jpg" alt="Cover of Holocaust" onerror="this.remove()"></div></div>
+      <div>
+        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">Holocaust</h1>
+        <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Henry Opeyemi</a></p>
+        <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
+        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20Holocaust%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
+      </div>
+    </div>
+  </section>
+  <section class="band ink">
+    <div class="wrap g2 rv">
+      <div><blockquote><p><span class="ph">[Endorsement quote]</span></p><cite><span class="ph">[Name, credential]</span></cite></blockquote></div>
+      <div><div style="margin-bottom:1.5rem"><div class="photo blank" style="aspect-ratio:1"><svg aria-hidden="true"><use href="#cat"/></svg><span>Author photo</span></div></div><p><strong>Henry Opeyemi</strong> <span class="ph">[Author biography]</span></p></div>
+    </div>
+  </section>
+</article>
+
+<!-- BOOK: PSALMIC -->
+<article class="page" id="book-psalmic">
+  <section class="hero band">
+    <div class="wrap g2 c">
+      <div class="book" style="max-width:420px"><div class="cover"><div class="fb ox"><small>Felis Catus Press</small>The Psalmic Field</div><img src="covers/the-psalmic-field.jpg" alt="Cover of The Psalmic Field" onerror="this.remove()"></div></div>
+      <div>
+        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">The Psalmic Field</h1>
+        <p class="lead mute" style="margin-top:1rem">Poems by <a href="#authors">Ridwan Àdìsá Fasasi</a></p>
+        <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
+        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Psalmic%20Field%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
+      </div>
+    </div>
+  </section>
+  <section class="band ink">
+    <div class="wrap g2 rv">
+      <div><blockquote><p><span class="ph">[Endorsement quote]</span></p><cite><span class="ph">[Name, credential]</span></cite></blockquote></div>
+      <div><div style="margin-bottom:1.5rem"><div class="photo blank" style="aspect-ratio:1"><svg aria-hidden="true"><use href="#cat"/></svg><span>Author photo</span></div></div><p><strong>Ridwan Àdìsá Fasasi</strong> <span class="ph">[Author biography]</span></p></div>
+    </div>
+  </section>
+</article>
+
+<!-- BOOK: ROAD -->
+<article class="page" id="book-road">
+  <section class="hero band">
+    <div class="wrap g2 c">
+      <div class="book" style="max-width:420px"><div class="cover"><div class="fb"><small>Felis Catus Press</small>The Road Is a Body</div><img src="covers/the-road-is-a-body.jpg" alt="Cover of The Road Is a Body" onerror="this.remove()"></div></div>
+      <div>
+        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">The Road Is a Body</h1>
+        <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Okoli Stephen Nonso</a></p>
+        <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
+        <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Road%20Is%20a%20Body%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
+      </div>
+    </div>
+  </section>
+  <section class="band ink">
+    <div class="wrap g2 rv">
+      <div><blockquote><p><span class="ph">[Endorsement quote]</span></p><cite><span class="ph">[Name, credential]</span></cite></blockquote></div>
+      <div><div style="margin-bottom:1.5rem"><div class="photo blank" style="aspect-ratio:1"><svg aria-hidden="true"><use href="#cat"/></svg><span>Author photo</span></div></div><p><strong>Okoli Stephen Nonso</strong> <span class="ph">[Author biography]</span></p></div>
+    </div>
+  </section>
+</article>
+
+<!-- AUTHORS -->
+<article class="page" id="authors">
+  <section class="hero band">
+    <div class="wrap">
+      <h1><span class="w"><span>Scions</span></span> <span class="w"><span>of</span></span> <span class="w"><span>the</span></span> <span class="w"><span><em>soil.</em></span></span></h1>
+      <p class="lead mute" style="margin-top:2rem">The poets published by Felis Catus Press.</p>
+    </div>
+  </section>
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="author rv">
+        <div><div class="photo"><img src="https://feliscatuspress.weebly.com/uploads/1/4/7/3/147392495/editor/1002384002.jpg" alt="Adamu Yahuza Abdullahi" loading="lazy"></div></div>
+        <div>
+          <h3>Adamu Yahuza Abdullahi</h3>
+          <p class="mute">Author of <a href="#book-rainbow">The Rainbow Is Not as Beautiful as My Ruins</a></p>
+          <p>A poet from Borgu, Nigeria, and a pioneer resident of Muktar Aliyu Art Residency, Minna. His work has appeared in Lolwe, Strange Horizons, Chestnut Review, A Long House, Rough Cut Press and The Temz Review. Finalist of the 2024 Garden Party Collective chapbook contest, Best of the Net nominee, and second-place winner of the Hassan Sulaiman Gimba Esq Poetry Prize and the Bill Ward Poetry Prize for Emerging Writers 2023.</p>
+        </div>
+      </div>
+      <div class="author rv">
+        <div><div class="photo"><img src="https://feliscatuspress.weebly.com/uploads/1/4/7/3/147392495/1002383998_orig.jpg" alt="Wisdom Adediji" loading="lazy"></div></div>
+        <div>
+          <h3>Wisdom Adediji</h3>
+          <p class="mute">Author of <a href="#book-children">Children of the Soil</a></p>
+          <p>A Nigerian genre-bending writer whose work has appeared on Icefloe Press, Blue Press, NND Poetry Column and elsewhere. He is a poetry editor at Candid Review and studies geography at the University of Ibadan, where he writes from.</p>
+        </div>
+      </div>
+      <div class="author rv">
+        <div><div class="photo blank"><svg aria-hidden="true"><use href="#cat"/></svg><span>Author photo</span></div></div>
+        <div>
+          <h3>Henry Opeyemi</h3>
+          <p class="mute">Author of <a href="#book-holocaust">Holocaust</a></p>
+          <p><span class="ph">[Author biography]</span></p>
+        </div>
+      </div>
+      <div class="author rv">
+        <div><div class="photo blank"><svg aria-hidden="true"><use href="#cat"/></svg><span>Author photo</span></div></div>
+        <div>
+          <h3>Ridwan Àdìsá Fasasi</h3>
+          <p class="mute">Author of <a href="#book-psalmic">The Psalmic Field</a></p>
+          <p><span class="ph">[Author biography]</span></p>
+        </div>
+      </div>
+      <div class="author rv">
+        <div><div class="photo blank"><svg aria-hidden="true"><use href="#cat"/></svg><span>Author photo</span></div></div>
+        <div>
+          <h3>Okoli Stephen Nonso</h3>
+          <p class="mute">Author of <a href="#book-road">The Road Is a Body</a></p>
+          <p><span class="ph">[Author biography]</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<!-- CONTACT -->
+<article class="page" id="contact">
+  <section class="hero band">
+    <div class="wrap">
+      <h1><span class="w"><span>Say</span></span> <span class="w"><span><em>hello.</em></span></span></h1>
+      <div class="g2" style="margin-top:3rem">
+        <p class="lead mute">Send us a message or follow us for updates on new titles, submission windows and the prize.</p>
+        <div class="contact">
+          <a href="mailto:feliscatuspress@gmail.com"><span>feliscatuspress@gmail.com</span><small>Email</small></a>
+          <a href="https://wa.me/2347035513533" target="_blank" rel="noopener"><span>0703 551 3533</span><small>WhatsApp orders</small></a>
+          <a href="https://x.com/feliscatuspress" target="_blank" rel="noopener"><span>@feliscatuspress</span><small>X</small></a>
+          <a href="https://facebook.com/feliscatuspress" target="_blank" rel="noopener"><span>/feliscatuspress</span><small>Facebook</small></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>
+
+</main>
+
+<section class="band ox bigcta">
+  <div class="wrap">
+    <div class="rv"><h2>Have a collection ready?</h2></div>
+    <div class="actions" style="margin:0"><a class="btn" href="#submit"><span class="fx"><span>Read the guidelines</span><span>Read the guidelines</span></span></a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap cols">
+    <div>
+      <a class="brand" href="#home"><svg class="cat"><use href="#cat"/></svg>Felis Catus Press</a>
+      <p style="max-width:32ch;margin:.75rem 0 0">Publishing the finest poetry from Nigeria. An imprint of Nimble House, Lagos.</p>
+    </div>
+    <nav>
+      <a href="#about">About</a><a href="#submit">Submit</a><a href="#prize">The Prize</a><a href="#books">Books</a><a href="#authors">Authors</a><a href="#contact">Contact</a>
+    </nav>
+    <p style="margin:0">© <span id="year"></span> Felis Catus Press</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var links = document.getElementById('links'), menu = document.getElementById('menu');
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12}) : null;
+  function watch(root){
+    Array.prototype.forEach.call(root.querySelectorAll('.rv'), function(el){
+      el.classList.remove('in');
+      if(io){ io.observe(el); } else { el.classList.add('in'); }
+    });
+  }
+  function replay(page){
+    Array.prototype.forEach.call(page.querySelectorAll('.hero h1 .w>span'), function(s){
+      s.style.animation='none'; void s.offsetWidth; s.style.animation='';
+    });
+  }
+  var current='home';
+  function go(id){
+    if(!document.getElementById(id)) id='home';
+    current=id;
+    try{ if(location.hash!=='#'+id) history.replaceState(null,'','#'+id); }catch(e){}
+    route();
+  }
+  function route(){
+    var id = current;
+    if(!document.getElementById(id)) id = 'home';
+    pages.forEach(function(p){ p.classList.toggle('show', p.id === id); });
+    var page = document.getElementById(id);
+    var nav = id.indexOf('book-') === 0 ? 'books' : id;
+    Array.prototype.forEach.call(links.querySelectorAll('a'), function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + nav); });
+    links.classList.remove('open'); menu.setAttribute('aria-expanded','false');
+    window.scrollTo(0,0);
+    replay(page); watch(page);
+    var h = page.querySelector('h1');
+    document.title = (id === 'home' ? '' : h.textContent.replace(/\s+/g,' ').trim() + ' — ') + 'Felis Catus Press';
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if(!a) return;
+    e.preventDefault();
+    go(a.getAttribute('href').slice(1));
+  });
+  window.addEventListener('hashchange', function(){ go((location.hash||'#home').slice(1)); });
+  menu.addEventListener('click', function(){ var o = links.classList.toggle('open'); menu.setAttribute('aria-expanded', o); });
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // duplicate ticker content so the loop is seamless
+  var track = document.getElementById('track'); track.innerHTML += track.innerHTML;
+
+  // submission window: all of March, results in August
+  var now = new Date(), y = now.getFullYear(), m = now.getMonth();
+  var open = m === 2, next = m < 2 ? y : y + 1;
+  var html = open
+    ? '<span class="dot open"></span><div class="t"><strong>Submissions are open</strong><p>Until 31 March ' + y + '. One manuscript per poet.</p></div><a class="btn" href="#submit"><span class="fx"><span>Read the guidelines</span><span>Read the guidelines</span></span></a>'
+    : '<span class="dot"></span><div class="t"><strong>Submissions are closed</strong><p>Next window: 1–31 March ' + next + '. Accepted manuscripts are announced in August.</p></div><a class="btn ghost" href="#submit"><span class="fx"><span>Prepare your manuscript</span><span>Prepare your manuscript</span></span></a>';
+  document.getElementById('status-home').innerHTML = html;
+  // the submit page is where the button leads, so show the status without it there
+  document.getElementById('status-submit').innerHTML = html.replace(/<a class="btn[\s\S]*<\/a>$/, '');
+
+  // prize window: 15 Dec 2026 to 15 Mar 2027, winner 15 Jun 2027
+  var pOpen = new Date(2026,11,15), pClose = new Date(2027,2,16), pWin = new Date(2027,5,15);
+  var mail = '<a class="btn" href="mailto:theosundareipadeolaprize@gmail.com?subject=Osundare-Ipadeola%20Poetry%20Book%20Prize%20entry"><span class="fx"><span>Email your entry</span><span>Email your entry</span></span></a>';
+  document.getElementById('status-prize').innerHTML = now < pOpen
+    ? '<span class="dot"></span><div class="t"><strong>Entries open 15 December 2026</strong><p>Deadline: 15 March 2027. Winner announced 15 June 2027.</p></div>'
+    : now < pClose
+    ? '<span class="dot open"></span><div class="t"><strong>Entries are open</strong><p>Until 15 March 2027. Winner announced 15 June 2027.</p></div>' + mail
+    : '<span class="dot"></span><div class="t"><strong>Entries are closed</strong><p>' + (now < pWin ? 'The winner will be announced on 15 June 2027.' : 'Details of the next edition will be announced here.') + '</p></div>';
+
+  // shared CTA + footer reveal
+  watch(document.querySelector('.bigcta'));
+  go((location.hash||'#home').slice(1));
+})();
+</script>
+</body>
+</html>
