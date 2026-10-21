@@ -55,13 +55,24 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:va
 .links a.active{text-decoration:underline;text-underline-offset:.35em;text-decoration-color:var(--ox);text-decoration-thickness:2px}
 .menu{display:none;background:none;border:1.5px solid var(--ink);border-radius:999px;padding:.45rem .95rem;font:inherit;font-weight:600;color:inherit;cursor:pointer}
 @media (max-width:860px){
-  .links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--paper);border-bottom:1.5px solid var(--ink);padding:.5rem var(--gx) 1rem}
-  .links.open{display:flex}
-  .links a{padding:.85rem 0;font-size:1.4rem;font-weight:700;letter-spacing:-.02em;border-bottom:1px solid var(--line)}
+  /* full-screen menu panel below the header */
+  .links{position:fixed;left:0;right:0;bottom:0;top:calc(4.5rem + 1.5px + env(safe-area-inset-top,0px));display:flex;flex-direction:column;gap:0;background:var(--ink);color:var(--on-ink);padding:1rem var(--gx) calc(1.5rem + env(safe-area-inset-bottom,0px));overflow-y:auto;counter-reset:n;visibility:hidden;opacity:0;transition:opacity .3s var(--ease),visibility 0s .3s}
+  .links.open{visibility:visible;opacity:1;transition:opacity .3s var(--ease)}
+  .links a{display:flex;align-items:baseline;gap:1rem;padding:1rem 0;font-size:clamp(1.7rem,7.5vw,2.3rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;border-bottom:1px solid rgba(255,255,255,.12);opacity:0;transform:translateY(14px);transition:opacity .45s var(--ease),transform .45s var(--ease)}
+  .links>a:not(.m-only){counter-increment:n}
+  .links>a:not(.m-only)::before{content:"0" counter(n);font-size:.8rem;font-weight:600;letter-spacing:.06em;color:var(--on-ink-mute);min-width:1.4rem}
+  .links a.active{text-decoration:none}
+  .links a.active::after{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--ox);align-self:center;margin-left:auto}
+  .links.open a{opacity:1;transform:none}
+  .links.open a:nth-child(2){transition-delay:.04s}.links.open a:nth-child(3){transition-delay:.08s}.links.open a:nth-child(4){transition-delay:.12s}.links.open a:nth-child(5){transition-delay:.16s}.links.open a:nth-child(6){transition-delay:.2s}.links.open a:nth-child(7){transition-delay:.24s}
+  .links .fx{line-height:1.15}
+  .links a.menu-cta{display:flex;justify-content:center;margin-top:auto;padding:1rem;border:0;border-radius:999px;background:var(--on-ink);color:var(--ink);font-size:1.05rem;letter-spacing:-.01em;transition-delay:.28s}
+  .links .menu-foot{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.25rem;margin-top:1rem;font-size:.9rem;color:var(--on-ink-mute)}
+  .links .menu-foot a{all:unset;cursor:pointer;color:inherit}
   .menu{display:inline-flex}
   .nav>.btn{display:none}
   .nav{display:flex;justify-content:space-between}
-  .links .m-only{display:block}
+  body.menu-open{overflow:hidden}
 }
 
 /* split-letter hover (text slides up, duplicate slides in) */
@@ -258,7 +269,8 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
       <a href="#prize"><span class="fx"><span>The Prize</span><span>The Prize</span></span></a>
       <a href="#books"><span class="fx"><span>Books</span><span>Books</span></span></a>
       <a href="#authors"><span class="fx"><span>Authors</span><span>Authors</span></span></a>
-      <a class="m-only" href="#contact">Contact</a>
+      <a class="m-only menu-cta" href="#contact">Contact us</a>
+      <div class="m-only menu-foot"><a href="mailto:feliscatuspress@gmail.com">feliscatuspress@gmail.com</a><a href="https://wa.me/2347035513533" target="_blank" rel="noopener">WhatsApp</a></div>
     </nav>
     <a class="btn" href="#contact"><span class="fx"><span>Contact us</span><span>Contact us</span></span></a>
     <button class="menu" id="menu" aria-expanded="false" aria-controls="links">Menu</button>
@@ -922,7 +934,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
     var page = document.getElementById(id);
     var nav = id.indexOf('book-') === 0 ? 'books' : id;
     Array.prototype.forEach.call(links.querySelectorAll('a'), function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + nav); });
-    links.classList.remove('open'); menu.setAttribute('aria-expanded','false');
+    setMenu(false);
     window.scrollTo(0,0);
     replay(page); watch(page);
     var h = page.querySelector('h1');
@@ -935,7 +947,12 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
     go(a.getAttribute('href').slice(1));
   });
   window.addEventListener('hashchange', function(){ go((location.hash||'#home').slice(1)); });
-  menu.addEventListener('click', function(){ var o = links.classList.toggle('open'); menu.setAttribute('aria-expanded', o); });
+  function setMenu(o){
+    links.classList.toggle('open', o); menu.setAttribute('aria-expanded', o);
+    menu.textContent = o ? 'Close' : 'Menu'; document.body.classList.toggle('menu-open', o);
+  }
+  menu.addEventListener('click', function(){ setMenu(!links.classList.contains('open')); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') setMenu(false); });
   document.getElementById('year').textContent = new Date().getFullYear();
 
   // duplicate ticker content so the loop is seamless
