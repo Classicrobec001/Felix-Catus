@@ -143,6 +143,13 @@ a:hover .fx>span:nth-child(2),button:hover .fx>span:nth-child(2){transform:trans
 .band.ink .book .cover{box-shadow:0 1px 0 rgba(255,255,255,.1),12px 14px 0 var(--ink-2)}
 .band.ink .book:hover .cover{box-shadow:0 1px 0 rgba(255,255,255,.1),22px 26px 0 var(--ink-2)}
 
+/* book detail hero: back link sits above the title on desktop, above the cover on mobile */
+.bookhero{grid-template-rows:1fr auto auto 1fr;grid-template-areas:"cover ." "cover back" "cover info" "cover .";row-gap:0}
+.bookhero>.book{grid-area:cover}
+.bookhero>.back{grid-area:back;justify-self:start;text-decoration:none;font-weight:600;margin-bottom:1.25rem}
+.bookhero>.info{grid-area:info}
+@media (max-width:860px){.bookhero{grid-template-columns:1fr;grid-template-rows:auto;grid-template-areas:"back" "cover" "info"}.bookhero>.book{margin-bottom:2rem}}
+
 /* numbered rows */
 .rows{border-top:1.5px solid currentColor}
 .row{display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;padding:1.6rem 0;border-bottom:1px solid var(--line);text-decoration:none;transition:padding-left .4s var(--ease)}
@@ -659,11 +666,11 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
 <!-- BOOK: RAINBOW -->
 <article class="page" id="book-rainbow">
   <section class="hero band">
-    <div class="wrap g2 c">
+    <div class="wrap g2 c bookhero">
+      <a class="mute back" href="#books">← All books</a>
       <div class="book" style="max-width:420px"><div class="cover"><div class="fb"><small>Felis Catus Press</small>The Rainbow Is Not as Beautiful as My Ruins</div><img src="covers/the-rainbow-is-not-as-beautiful-as-my-ruins.jpg" alt="Cover of The Rainbow Is Not as Beautiful as My Ruins" onerror="this.remove()"></div></div>
-      <div>
-        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
-        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">The Rainbow Is Not as Beautiful as My Ruins</h1>
+      <div class="info">
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem)">The Rainbow Is Not as Beautiful as My Ruins</h1>
         <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Adamu Yahuza Abdullahi</a></p>
         <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
         <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Rainbow%20Is%20Not%20as%20Beautiful%20as%20My%20Ruins%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
@@ -690,11 +697,11 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
 <!-- BOOK: CHILDREN -->
 <article class="page" id="book-children">
   <section class="hero band">
-    <div class="wrap g2 c">
+    <div class="wrap g2 c bookhero">
+      <a class="mute back" href="#books">← All books</a>
       <div class="book" style="max-width:420px"><div class="cover"><div class="fb ox"><small>Felis Catus Press</small>Children of the Soil</div><img src="covers/children-of-the-soil.jpg" alt="Cover of Children of the Soil" onerror="this.remove()"></div></div>
-      <div>
-        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
-        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">Children of the Soil</h1>
+      <div class="info">
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem)">Children of the Soil</h1>
         <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Wisdom Adediji</a></p>
         <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
         <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20Children%20of%20the%20Soil%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
@@ -720,11 +727,11 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
 <!-- BOOK: HOLOCAUST -->
 <article class="page" id="book-holocaust">
   <section class="hero band">
-    <div class="wrap g2 c">
+    <div class="wrap g2 c bookhero">
+      <a class="mute back" href="#books">← All books</a>
       <div class="book" style="max-width:420px"><div class="cover"><div class="fb"><small>Felis Catus Press</small>Holocaust</div><img src="covers/holocaust.jpg" alt="Cover of Holocaust" onerror="this.remove()"></div></div>
-      <div>
-        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
-        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">Holocaust</h1>
+      <div class="info">
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem)">Holocaust</h1>
         <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Henry Opeyemi</a></p>
         <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
         <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20Holocaust%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
@@ -742,11 +749,11 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
 <!-- BOOK: PSALMIC -->
 <article class="page" id="book-psalmic">
   <section class="hero band">
-    <div class="wrap g2 c">
+    <div class="wrap g2 c bookhero">
+      <a class="mute back" href="#books">← All books</a>
       <div class="book" style="max-width:420px"><div class="cover"><div class="fb ox"><small>Felis Catus Press</small>The Psalmic Field</div><img src="covers/the-psalmic-field.jpg" alt="Cover of The Psalmic Field" onerror="this.remove()"></div></div>
-      <div>
-        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
-        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">The Psalmic Field</h1>
+      <div class="info">
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem)">The Psalmic Field</h1>
         <p class="lead mute" style="margin-top:1rem">Poems by <a href="#authors">Ridwan Àdìsá Fasasi</a></p>
         <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
         <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Psalmic%20Field%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
@@ -764,11 +771,11 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
 <!-- BOOK: ROAD -->
 <article class="page" id="book-road">
   <section class="hero band">
-    <div class="wrap g2 c">
+    <div class="wrap g2 c bookhero">
+      <a class="mute back" href="#books">← All books</a>
       <div class="book" style="max-width:420px"><div class="cover"><div class="fb"><small>Felis Catus Press</small>The Road Is a Body</div><img src="covers/the-road-is-a-body.jpg" alt="Cover of The Road Is a Body" onerror="this.remove()"></div></div>
-      <div>
-        <a class="mute" href="#books" style="text-decoration:none;font-weight:600">← All books</a>
-        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem);margin-top:1.25rem">The Road Is a Body</h1>
+      <div class="info">
+        <h1 style="font-size:clamp(2.2rem,5vw,4.4rem)">The Road Is a Body</h1>
         <p class="lead mute" style="margin-top:1rem">by <a href="#authors">Okoli Stephen Nonso</a></p>
         <p style="font-weight:700;font-size:1.4rem">₦3,500</p>
         <div class="actions"><a class="btn" href="https://wa.me/2347035513533?text=Hello%2C%20I%27d%20like%20to%20order%20The%20Road%20Is%20a%20Body%20%28%E2%82%A63%2C500%29." target="_blank" rel="noopener"><span class="fx"><span>Buy on WhatsApp</span><span>Buy on WhatsApp</span></span></a></div>
