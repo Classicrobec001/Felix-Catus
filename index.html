@@ -108,6 +108,8 @@ a:hover .fx>span:nth-child(2),button:hover .fx>span:nth-child(2){transform:trans
 .photo:hover img{transform:scale(1.04)}
 .photo .cap{position:absolute;left:0;right:0;bottom:0;padding:.75rem 1rem;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--on-ink);background:linear-gradient(transparent,rgba(21,19,15,.75));z-index:2}
 
+.photo .cap.credit{font-size:.55rem;font-weight:500;letter-spacing:.04em;text-transform:none;padding:.5rem .7rem;opacity:.85}
+
 /* reveal on scroll */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .rv.in{opacity:1;transform:none}
@@ -199,6 +201,7 @@ blockquote cite{font-style:normal;color:var(--mute);font-size:.95rem}
 .facts>div+div{padding-left:1.5rem;border-left:1px solid var(--line)}
 .facts b{font-size:clamp(2.2rem,4.5vw,3.6rem);letter-spacing:-.04em;line-height:1}
 .facts span{color:var(--mute)}
+.facts.two{grid-template-columns:repeat(2,1fr)}
 @media (max-width:760px){.facts{grid-template-columns:1fr 1fr}.facts>div:nth-child(3){padding-left:0;border-left:0}.facts>div:nth-child(n+3){border-top:1px solid var(--line)}}
 .steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;counter-reset:s}
 .steps li{counter-increment:s;border-top:1.5px solid var(--ink);padding-top:1.25rem}
@@ -285,7 +288,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
       <div>
         <div class="hero-sub">
           <div>
-            <p class="lead intro">Felis Catus Press publishes the finest poetry from Nigeria. No submission fee, no publishing cost, one window every March.</p>
+            <p class="lead intro">Publishing finest poetry from Nigeria</p>
             <div class="actions cta3">
               <a class="btn" href="#books"><span class="fx"><span>Browse the books</span><span>Browse the books</span></span></a>
               <a class="btn ghost" href="#submit"><span class="fx"><span>Submit to Chapbooks</span><span>Submit to Chapbooks</span></span></a>
@@ -348,7 +351,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
 
   <section class="band ox">
     <div class="wrap g2 rv">
-      <div><h2>One window a year. Every poet. No fees.</h2></div>
+      <div><h2>CHAPBOOK SUBMISSION</h2></div>
       <div style="align-self:end">
         <p class="lead">We read chapbook manuscripts of 20–30 poems from Nigerians and poets resident in Nigeria throughout March, and announce accepted collections in August.</p>
         <div class="status" id="status-home"></div>
@@ -512,18 +515,16 @@ footer a{text-decoration:none}footer a:hover{color:var(--on-ink)}
 
   <section class="band">
     <div class="wrap">
-      <div class="facts rv">
+      <div class="facts two rv">
         <div><b>₦150k</b><span>prize money, plus a publishing contract</span></div>
         <div><b>45–60</b><span>poems, 60–70 pages</span></div>
-        <div><b>1st–3rd</b><span>full-length collection</span></div>
-        <div><b>₦0</b><span>to enter</span></div>
       </div>
     </div>
   </section>
 
   <section class="band" style="padding-top:0">
     <div class="wrap g2 c rv">
-      <div><div class="photo" style="aspect-ratio:4/3"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&q=75" alt="A row of books with golden light on their spines" loading="lazy"><span class="cap">Inaugural edition</span></div></div>
+      <div><div class="photo" style="aspect-ratio:4/3"><img src="images/poetry-collections.jpg" alt="A stack of poetry collections" loading="lazy"><span class="cap credit">Photo credit: Abdulkareem Abdulkareem</span></div></div>
       <div>
         <h2>What the winner receives.</h2>
         <ul class="plain">
